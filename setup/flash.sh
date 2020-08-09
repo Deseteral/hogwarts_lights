@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-PORT='/dev/tty.usbserial-1430'
-BAUD='115200'
+source ./setup/set_vars.sh
 
 echo '    [performing erase_flash]'
 esptool.py --port $PORT erase_flash
@@ -26,11 +25,6 @@ echo "    [press ctrl+X after installation is done]\n"
 rshell -f ./setup/install_micropython_deps.rshell
 echo ''
 
-echo '    [flashing app code]'
-ampy -p $PORT -b $BAUD -d 2 put ./main.py
-echo ''
-
-echo '    [reseting board]'
-rshell -f ./setup/reset_board.rshell
+source ./setup/flash_app_code.sh
 
 echo "DONE."
