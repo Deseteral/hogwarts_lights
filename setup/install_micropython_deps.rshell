@@ -1,0 +1,2 @@
+connect serial /dev/tty.usbserial-1430
+repl ~ import upip ~ upip.install('micropython-uasyncio') ~ upip.install('micropython-ulogging') ~ upip.install('micropython-pkg_resources') ~ print('\npress ctrl+x now')

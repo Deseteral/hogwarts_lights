@@ -1,0 +1,2 @@
+connect serial /dev/tty.usbserial-1430
+repl ~ import machine ~ machine.reset() ~
