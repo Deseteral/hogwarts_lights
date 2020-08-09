@@ -1,7 +1,5 @@
-import picoweb
+# Hardware setup
 import machine
-
-app = picoweb.WebApp(__name__)
 
 pwm_r = machine.PWM(machine.Pin(0), 5000)
 pwm_g = machine.PWM(machine.Pin(4), 5000)
@@ -18,6 +16,12 @@ def light_off():
     pwm_b.duty(0)
 
 light_off()
+
+# Server setup
+import picoweb
+import ulogging as logging
+
+app = picoweb.WebApp(__name__)
 
 @app.route('/', methods=['POST'])
 def index(req, resp):
@@ -36,7 +40,6 @@ def homepage(request, response):
     yield from picoweb.jsonify(response, {'light': 'off'})
     return
 
-import ulogging as logging
 logging.basicConfig(level=logging.INFO)
 
 app.run(debug=True, host='0.0.0.0', port=80)
